@@ -6,9 +6,10 @@ window.addEventListener('load', function () {
     var canvas = document.getElementById('output');
     var context = canvas.getContext('2d');
     var buttonClear = this.document.getElementById('btn-clear');
-    context.lineWidth = 20;
+    context.lineWidth = 40;
 
-    context.fillStyle = "darkgreen";
+    context.fillStyle = "white";
+    context.drawStyle = "black"
     context.fillRect(0, 0, canvas.width, canvas.height);
     var isIdle = true;
 
@@ -43,12 +44,13 @@ window.addEventListener('load', function () {
 
       let formData = new FormData();
       formData.append("image", imageBlob, "image.png");
-
+      
       let response = await fetch('http://localhost:5000/predict', {
           method: 'POST',
-          body: formData
+          body: formData,
       });
-      let result = await response.json();
+      let result = await response.text()
+      console.log(result);
     }
     function touchstart(event) { 
         drawstart(event.touches[0]) 
