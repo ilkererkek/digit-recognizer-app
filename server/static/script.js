@@ -44,7 +44,7 @@ window.addEventListener('load', function () {
       let formData = new FormData();
       formData.append("image", imageBlob, "image.png");
 
-      let response = await fetch('http://localhost:8000/image', {
+      let response = await fetch('http://localhost:5000/predict', {
           method: 'POST',
           body: formData
       });
