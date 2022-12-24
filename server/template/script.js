@@ -1,8 +1,24 @@
+
+
+
 window.addEventListener('load', function () {
     // get the canvas element and its context
     var canvas = document.getElementById('output');
     var context = canvas.getContext('2d');
+    var buttonClear = this.document.getElementById('btn-clear');
+    context.lineWidth = 20;
+
+    context.fillStyle = "darkgreen";
+    context.fillRect(0, 0, canvas.width, canvas.height);
     var isIdle = true;
+
+
+    const clear = (e) => {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.fillRect(0, 0, canvas.width, canvas.height);
+    };
+
+
     function drawstart(event) {
       context.beginPath();
       context.moveTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
@@ -10,13 +26,29 @@ window.addEventListener('load', function () {
     }
     function drawmove(event) {
       if (isIdle) return;
-      context.lineTo(event.pageX - canvas.offsetLeft, event.pageY - canvas.offsetTop);
+      const x = event.pageX - canvas.offsetLeft;
+      const y = event.pageY - canvas.offsetTop;
+      if(x > canvas.width || x < 0 || y > canvas.height || y < 0){
+        drawend()
+      }
+      context.lineTo(x, y);
       context.stroke();
     }
-    function drawend(event) {
+    async function drawend(event) {
       if (isIdle) return;
       drawmove(event);
       isIdle = true;
+
+      let imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+
+      let formData = new FormData();
+      formData.append("image", imageBlob, "image.png");
+
+      let response = await fetch('http://localhost:8000/image', {
+          method: 'POST',
+          body: formData
+      });
+      let result = await response.json();
     }
     function touchstart(event) { 
         drawstart(event.touches[0]) 
@@ -27,26 +59,16 @@ window.addEventListener('load', function () {
     }
     async function touchend(event) { 
         drawend(event.changedTouches[0]) 
-
-        let imageBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-
-        let formData = new FormData();
-        formData.append("image", imageBlob, "image.png");
-
-        let response = await fetch('http://localhost:8000/image', {
-            method: 'POST',
-            body: formData
-        });
-        let result = await response.json();
-
     }
   
     canvas.addEventListener('touchstart', touchstart, false);
     canvas.addEventListener('touchmove', touchmove, false);
-    canvas.addEventListener('touchend', touchend, false);        
+    canvas.addEventListener('touchend',touchend, false);        
   
     canvas.addEventListener('mousedown', drawstart, false);
     canvas.addEventListener('mousemove', drawmove, false);
     canvas.addEventListener('mouseup', drawend, false);
+
+    buttonClear.addEventListener('click', clear)
   
   }, false); // end window.onLoad
