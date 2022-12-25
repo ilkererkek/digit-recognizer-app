@@ -2,7 +2,6 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 from flask_cors import CORS, cross_origin
-import numpy as np
 
 from model.digit_recognizer import DigitRecognizerModel
 from functions.request_decoder import decode_request
