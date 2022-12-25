@@ -13,7 +13,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 print('Model Loading')
-model = DigitRecognizerModel('./ModelFiles/model.h5')
+model = DigitRecognizerModel('./ModelFiles/2cnramodel.h5')
 print('Model loaded')
 
 
