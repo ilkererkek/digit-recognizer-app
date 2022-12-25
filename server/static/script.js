@@ -1,6 +1,3 @@
-
-
-
 window.addEventListener('load', function () {
 
   // get the canvas element and its context
@@ -44,9 +41,12 @@ window.addEventListener('load', function () {
         method: 'POST',
         body: formData,
     });
+
     let result = await response.text()
-    console.log(result);
+    const printedResult = document.getElementsByName('resultante-1');
+    printedResult[0].innerHTML = result;
   }
+
   function touchstart(event) { 
       drawstart(event.touches[0]) 
   }
@@ -64,7 +64,7 @@ window.addEventListener('load', function () {
   canvas.addEventListener('mousemove', drawmove, false);
   canvas.addEventListener('mouseup', drawend, false)
   buttonClear.addEventListener('click', clear)
-
+  
   const navId = document.getElementById("nav_menu"),
   ToggleBtnId = document.getElementById("toggle_btn"),
   CloseBtnId = document.getElementById("close_btn");
@@ -140,4 +140,19 @@ window.addEventListener('load', function () {
     var fileinput = document.getElementById("finput");
     var image = new SimpleImage(fileinput);
     image.drawTo(imgcanvas);
+    setTimeout(uploaded_image_to_digit, 1000);
+  }
+  var canvas2 = document.getElementById('canv1');
+  async function uploaded_image_to_digit(){
+    let imageBlob = await new Promise(resolve => canvas2.toBlob(resolve, 'image/png'));
+    let formData = new FormData();
+    formData.append("image", imageBlob, "image.png");
+    let response = await fetch('http://localhost:5000/predict', {
+      method: 'POST',
+      body: formData,
+    });
+
+    let result = await response.text()
+    const printedResult = document.getElementsByName('resultante-2');
+    printedResult[0].innerHTML = result;
   }
