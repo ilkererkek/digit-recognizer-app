@@ -42,9 +42,9 @@ window.addEventListener('load', function () {
         body: formData,
     });
 
-    let result = await response.text()
+    let result = await response.json()
     const printedResult = document.getElementsByName('resultante-1');
-    printedResult[0].innerHTML = result;
+    printedResult[0].innerHTML = result.Prediction;
   }
 
   function touchstart(event) { 
@@ -152,7 +152,8 @@ window.addEventListener('load', function () {
       body: formData,
     });
 
-    let result = await response.text()
+    let result = await response.json()
     const printedResult = document.getElementsByName('resultante-2');
-    printedResult[0].innerHTML = result;
+    console.log(result)
+    printedResult[0].innerHTML = result.Prediction
   }
