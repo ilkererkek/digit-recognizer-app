@@ -1,18 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-        <div class="container">
-            <h1>Deneme</h1>
-            <canvas id="output" width='750' height='750' ></canvas>
-            <button id="btn-clear">Clean</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digit Recognizer</title>
+
+    <!-- ==== STYLE.CSS ==== -->
+    <link rel="stylesheet" href="/static/css/style.css" />
+
+    <!-- ====  REMIXICON CDN ==== -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- ==== ANIMATE ON SCROLL CSS CDN  ==== -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- ==== HEADER ==== -->
+    <header class="container header">
+      <!-- ==== NAVBAR ==== -->
+      <nav class="nav">
+        <div class="logo">
+          <h2>Digit Recognizer</h2>
         </div>
-    <script src="/static/script.js"></script>
-</body>
+
+        <div class="nav_menu" id="nav_menu">
+          <button class="close_btn" id="close_btn">
+            <i class="ri-close-fill"></i>
+          </button>
+
+          <ul class="nav_menu_list">
+            <li class="nav_menu_item">
+              <a href="#" class="nav_menu_link">about</a>
+            </li>
+            <li class="nav_menu_item">
+              <a href="#" class="nav_menu_link">contact</a>
+            </li>
+          </ul>
+        </div>
+
+        <button class="toggle_btn" id="toggle_btn">
+          <i class="ri-menu-line"></i>
+        </button>
+      </nav>
+    </header>
+
+    <section class="wrapper" id="section1">
+      <div class="container">
+        <div class="grid-cols-2">
+          <div class="grid-item-1">
+            <h1 class="main-heading">
+              Welcome to
+              <br />
+              <span>Digit Recognizer</span>
+            </h1>
+            <p class="info-text">
+              You can draw a digit to whiteboard, or upload an image, and the model will predict the digit.
+            </p>
+
+            <div class="btn_wrapper">
+              <button class="btn view_more_btn" onclick="window.location.href='#section2'">Draw a digit</button>
+
+              <button class="btn view_more_btn" onclick="window.location.href='#section3'">Upload an image</button>
+            </div>
+          </div>
+          <div class="grid-item-2">
+            <div class="team_img_wrapper">
+              <img src="./img/team.svg" alt="team-img" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrapper" id="section2">
+        <div class="container">
+          <div class="grid-cols-2" style="display:flex">
+            <div class="grid-item-1">
+              <h1 style="text-align:center">
+                <span >Draw a digit to the whiteboard</span>
+              </h1>  
+              <br>         
+              <canvas id="output" width='750' height='750'></canvas>
+            </div>  
+            <div class="grid-item-2">
+                <h1 style="text-align:center">
+                    <span>Result</span>
+                  </h1>  
+                  <br> 
+                  <div class = "resultante-importante">
+                    <p>9</p>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="clear-div">
+                    <button class="btn documentation_btn" id="btn-clear">Clean</button>
+                  </div>
+              </div>         
+          </div>
+        </div>
+      </section>
+
+      <section class="wrapper" id="section3">
+        <div class="container">
+          <div class="grid-cols-2" style="display:flex">
+            <div class="grid-item-1">
+              <h1 style="text-align:center">
+                <span >Upload an image</span>
+              </h1>  
+              <br>         
+              <div>
+                <canvas id= "canv1"  style="height: 750px; width: 750px;"></canvas>               
+              </div>
+            </div>  
+            <div class="grid-item-2">
+                <h1 style="text-align:center">
+                    <span>Result</span>
+                  </h1>  
+                  <br> 
+                  <div class = "resultante-importante">
+                    <p>9</p>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="mb-3">
+                    <input type="file" multiple="false" accept="image/*" id=finput onchange="upload()">
+                  </div>
+              </div>         
+          </div>
+        </div>
+      </section>
+
+    <footer></footer>
+
+    <!-- ==== ANIMATE ON SCROLL JS CDN -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- ==== GSAP CDN ==== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <!-- ==== SCRIPT.JS ==== -->
+    <script src="/static/script.js" defer></script>
+    <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+     </body>
 </html>
