@@ -3,8 +3,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.layers import Reshape, Softmax
 from numpy import argmax
 class DigitRecognizerModel(Model):
-    def __init__(self, path):
-        super(DigitRecognizerModel, self).__init__()
+    def __init__(self, path, **kwargs):
+        super(DigitRecognizerModel, self).__init__(**kwargs)
         self.model = load_model(path)
         self.softmax = Softmax()
         
